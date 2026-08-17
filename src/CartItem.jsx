@@ -20,7 +20,7 @@ const CartItem = ({ onContinueShopping }) => {
     e.preventDefault();
 
     // Return from the cart to the Product Listing page.
-    onContinueShopping();
+    onContinueShopping(e);
 
     // Make the navigation explicit without reloading the React app.
     window.location.hash = 'plants';
