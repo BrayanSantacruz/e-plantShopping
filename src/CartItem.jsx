@@ -18,7 +18,13 @@ const CartItem = ({ onContinueShopping }) => {
 
   const handleContinueShopping = (e) => {
     e.preventDefault();
-    onContinueShopping(e);
+
+    // Return from the cart to the Product Listing page.
+    onContinueShopping();
+
+    // Make the navigation explicit without reloading the React app.
+    window.location.hash = 'plants';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleCheckoutShopping = () => {
