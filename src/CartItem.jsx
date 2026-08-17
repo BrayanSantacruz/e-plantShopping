@@ -18,11 +18,7 @@ const CartItem = ({ onContinueShopping }) => {
 
   const handleContinueShopping = (e) => {
     e.preventDefault();
-
-    // Return from the cart to the Product Listing page.
     onContinueShopping(e);
-
-    // Make the navigation explicit without reloading the React app.
     window.location.hash = 'plants';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -41,16 +37,20 @@ const CartItem = ({ onContinueShopping }) => {
   };
 
   const handleDecrement = (item) => {
-    if (item.quantity > 1) {
-      dispatch(
-        updateQuantity({
-          name: item.name,
-          quantity: item.quantity - 1,
-        })
-      );
-    } else {
+    const newQuantity = item.quantity - 1;
+
+    // If decrementing would make the quantity zero, remove the item completely.
+    if (newQuantity <= 0) {
       dispatch(removeItem(item.name));
+      return;
     }
+
+    dispatch(
+      updateQuantity({
+        name: item.name,
+        quantity: newQuantity,
+      })
+    );
   };
 
   const handleRemove = (item) => {
